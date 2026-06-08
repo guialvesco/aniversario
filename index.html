@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário, Ana Clara ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ff9ac6,#a78bfa);
+overflow-x:hidden;
+color:white;
+}
+.card{
+max-width:950px;
+margin:30px auto;
+padding:30px;
+border-radius:25px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(12px);
+box-shadow:0 8px 32px rgba(0,0,0,.25);
+text-align:center;
+}
+h1{font-size:3rem;text-shadow:0 0 15px #fff}
+#mensagem{min-height:160px;font-size:1.15rem;line-height:1.7}
+.slideshow{
+width:100%;max-width:500px;margin:auto;position:relative;
+}
+.slide{
+width:100%;border-radius:20px;display:none;
+box-shadow:0 0 20px rgba(255,255,255,.4);
+}
+.active{display:block;animation:fade 1s}
+@keyframes fade{from{opacity:.3}to{opacity:1}}
+button{
+padding:14px 22px;border:none;border-radius:12px;
+font-size:16px;cursor:pointer;margin:8px;
+}
+.fuja{background:#ddd}
+#real{
+background:#ff4fa0;color:white;font-weight:bold;
+}
+.heart,.firework{
+position:fixed;
+pointer-events:none;
+}
+.heart{
+font-size:24px;
+animation:up 7s linear forwards;
+}
+@keyframes up{
+from{transform:translateY(0);opacity:1}
+to{transform:translateY(-120vh);opacity:0}
+}
+#surpresa{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+align-items:center;
+justify-content:center;
+}
+.box{
+background:white;color:#333;
+padding:30px;border-radius:20px;
+max-width:600px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h1>🎉 Feliz Aniversário, Ana Clara 🎉</h1>
+
+<audio autoplay loop controls>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<h2>❤️ Uma Mensagem Para Você ❤️</h2>
+<p id="mensagem"></p>
+
+<h2><h2>✨ Algumas Fotos de Uma Pessoa Muito Especial ✨</h2>
+
+<div class="slideshow">
+    <img class="slide active" src="WhatsApp Image 2026-06-08 at 13.32.46.jpeg" alt="Ana Clara sorrindo">
+    <img class="slide" src="WhatsApp Image 2026-06-08 at 13.32.45.jpeg" alt="Ana Clara">
+    <img class="slide" src="WhatsApp Image 2026-06-08 at 13.28.29 (1).jpeg" alt="Foto com amigos">
+</div>
+
+<h2>🎁 Escolha seu presente</h2>
+<button class="fuja">iPhone 17 Pro Max</button>
+<button class="fuja">Viagem para Paris</button>
+<button class="fuja">Porsche 911</button>
+<button class="fuja">Notebook Gamer</button>
+
+<br>
+<button id="real">💖 Abraço e um Beijo 💖</button>
+</div>
+
+<div id="surpresa">
+<div class="box">
+<h2>❤️ Surpresa ❤️</h2>
+<p>
+Ana Clara,
+
+Hoje o mundo comemora mais um ano da existência de uma pessoa incrível.
+Espero que este pequeno site consiga transmitir um pouco do carinho e da admiração que muitas pessoas têm por você.
+
+Que seus 18 anos sejam cheios de felicidade, novas experiências, conquistas e momentos inesquecíveis.
+
+Continue sendo essa pessoa especial que consegue iluminar os lugares por onde passa.
+
+Feliz aniversário! ❤️🎂✨
+
+— Guilherme
+</p>
+<button onclick="document.getElementById('surpresa').style.display='none'">Fechar</button>
+</div>
+</div>
+
+<script>
+const texto=`Ana Clara,
+
+Hoje é o seu dia. Que nunca faltem motivos para sorrir, pessoas para compartilhar momentos felizes e sonhos para conquistar.
+
+Você merece tudo de melhor. Feliz aniversário! ❤️`;
+
+let i=0;
+(function escrever(){
+ if(i<texto.length){
+  document.getElementById("mensagem").innerHTML+=texto[i++];
+  setTimeout(escrever,35);
+ }
+})();
+
+let atual=0;
+const slides=document.querySelectorAll('.slide');
+setInterval(()=>{
+ slides[atual].classList.remove('active');
+ atual=(atual+1)%slides.length;
+ slides[atual].classList.add('active');
+},3000);
+
+document.querySelectorAll('.fuja').forEach(btn=>{
+ btn.addEventListener('mouseover',()=>{
+  btn.style.position='fixed';
+  btn.style.left=Math.random()*(window.innerWidth-200)+'px';
+  btn.style.top=Math.random()*(window.innerHeight-80)+'px';
+ });
+});
+
+setInterval(()=>{
+ let h=document.createElement('div');
+ h.className='heart';
+ h.innerHTML='❤️';
+ h.style.left=Math.random()*100+'vw';
+ h.style.bottom='-20px';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
+},400);
+
+function fireworks(){
+ for(let i=0;i<80;i++){
+   let f=document.createElement('div');
+   f.className='firework';
+   f.innerHTML='✨';
+   f.style.left='50vw';
+   f.style.top='50vh';
+   document.body.appendChild(f);
+
+   let x=(Math.random()-0.5)*700;
+   let y=(Math.random()-0.5)*700;
+
+   f.animate([
+    {transform:'translate(0,0)',opacity:1},
+    {transform:`translate(${x}px,${y}px)`,opacity:0}
+   ],{duration:1500});
+
+   setTimeout(()=>f.remove(),1500);
+ }
+}
+
+document.getElementById('real').onclick=()=>{
+ fireworks();
+ document.getElementById('surpresa').style.display='flex';
+};
+</script>
+</body>
+</html>
